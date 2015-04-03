@@ -53,6 +53,8 @@ retract_data1 :-
 %*************************** Q2 TESTS ******************************
 %*******************************************************************
 
+% The following tests were provided by the TAs.
+
 test3_1 :-
     assert(room(r1)),
     assert(room(r2)),
@@ -116,16 +118,6 @@ test3_3 :-
     retract(at(a,firstDayPm,_)),
     retract(at(d,_,r4)).
 
-%*******************************************************************
-% test3_4
-% Session will be held in five different rooms.  
-% Session d,g,h,k cannot be held at the same time.  
-% Session a,c cannot be held at the same time.  
-% Session k should precede d.  
-% Session d should precede j.  
-% Session a is schedule at any time in room r2.  
-% Session c is schedule at any time in room r3.  
-
 test3_4 :-
     assert(room(r1)),
     assert(room(r2)),
@@ -152,15 +144,6 @@ test3_4 :-
     retract(before(d,j)),
     retract(at(a,_,r2)),
     retract(at(c,_,r3)).
-
-%*******************************************************************
-% test3_5
-% Session will be held in five different rooms.  
-% Session e,f,i,j cannot be held at the same time.  
-% Session f should precede j.   
-% Session d should precede f.  
-% Session j should precede d.  
-% Session f is schedule at any time in room r4.  
 
 test3_5 :-
     assert(room(r1)),

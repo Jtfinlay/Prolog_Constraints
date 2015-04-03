@@ -233,17 +233,27 @@ subsetSum(L,Result) :-
 
     pullValues(B,L,Result).
 
+% pulValues(+Binary, +List, -Result) : Binary list of 0s/1s identify
+% which elements of List to use. These elements are then checked to
+% whether they sum to 0.
+
 pullValues([],[],[]).
 pullValues([0|BT],[_|LT],R) :- pullValues(BT,LT,R).
 pullValues([1|BT],[LH|LT],[LH|R]) :- pullValues(BT,LT,R).
+
+% constrainMax(+L) : Ensure sum of elements in zero.
 
 constrainMax(V) :-
     sum(V,R),
     R #= 0.
 
+% constrainEmpty(+L) : Ensure Binary list of 0s/1s is not all zeros.
+
 constrainEmpty(B) :-
     sum(B,R),
     R #\= 0.
+
+% sum(+L, -R) : Sum given list of integers.
 
 sum([],0).
 sum([H|T],R) :-
