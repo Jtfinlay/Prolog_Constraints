@@ -168,7 +168,7 @@ constr2(L, [H|C]) :-
 constr3(_,_,[]).
 constr3(TL,RL,[HC|TC]) :-
     constr3_rooms(RL,HC),
-    %constr3_times(TL,HC),
+    constr3_times(TL,HC),
     constr3(TL,RL,TC).
 
 % constr3_rooms(+RoomList,+Constraint) :- Satisfy room constraint
@@ -239,4 +239,43 @@ zip([X|Xs], [Y|Ys], [[X,Y]|Zs]) :- zip(Xs,Ys,Zs).
 
 %*******************************************************************
 % Q3 ***************************************************************
+% subsetSum(+L,-Result) : 
+
+subsetSum(L,Result) :-
+    length(L, Len),
+    length(B, Len),
+
+    domain(B,0,1),
+    
+    pullValues(B,L,V),
+    constrainMax(V),
+    constrainEmpty(B),
+
+    labeling([],V),
+
+    pullValues(B,L,Result).
+
+pullValues([],[],[]).
+pullValues([0|BT],[_|LT],R) :- pullValues(BT,LT,R).
+pullValues([1|BT],[LH|LT],[LH|R]) :- pullValues(BT,LT,R).
+
+constrainMax(V) :-
+    sum(V,R),
+    R #= 0.
+
+constrainEmpty(B) :-
+    sum(B,R),
+    R #\= 0.
+
+sum([],0).
+sum([H|T],R) :-
+    sum(T,R1),
+    R is H+R1.
+
+
+
+
+
+
+
 
